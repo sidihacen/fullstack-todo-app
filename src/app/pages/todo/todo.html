@@ -1,0 +1,80 @@
+<div class="todo-container">
+
+  <header class="todo-header">
+
+    <div>
+      <h1>Todo App</h1>
+
+      <p>
+        Bonjour <strong>{{ username }}</strong> 👋
+      </p>
+    </div>
+
+    <button (click)="logout()">
+      Se déconnecter
+    </button>
+
+    <button (click)="loadTasks()">
+  Rafraîchir
+    </button>
+
+  </header>
+
+  <section class="add-task">
+
+    <input
+      type="text"
+      placeholder="Nouvelle tâche"
+      [(ngModel)]="newTask"
+      (keyup.enter)="addTask()"
+    >
+
+    <button (click)="addTask()">
+      Ajouter
+    </button>
+
+  </section>
+
+  <section>
+
+    <h2>Mes tâches</h2>
+
+    @if (tasks.length === 0) {
+
+      <p>Aucune tâche pour le moment.</p>
+
+    } @else {
+
+      <ul>
+
+        @for (task of tasks; track task.id) {
+
+          <li [class.completed]="task.completed">
+
+            <input
+              type="checkbox"
+              [(ngModel)]="task.completed"
+              (change)="toggleTask(task)"
+            >
+
+            <span>{{ task.title }}</span>
+
+            <button (click)="editTask(task)">
+              Modifier
+            </button>
+
+            <button (click)="deleteTask(task)">
+              Supprimer
+            </button>
+
+          </li>
+
+        }
+
+      </ul>
+
+    }
+
+  </section>
+
+</div>
